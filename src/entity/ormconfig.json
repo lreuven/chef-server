@@ -1,0 +1,16 @@
+[
+  {
+    "name": "default",
+    "type": "mssql",
+    "host": "wallettabit.database.windows.net",
+    "port": 1433,
+    "username": "chef",
+    "password": "vbXS3W9x92cdcD9V",
+    "database": "isrProd",
+    "schema": "dbo",
+    "synchronize": false,
+    "entities": [
+      "entities/*.js"
+    ]
+  }
+]
