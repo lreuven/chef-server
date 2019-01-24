@@ -1,6 +1,6 @@
 import { Body, Controller, Logger, Post, Req, UseGuards } from '@nestjs/common';
 import { ConfigService } from '../../config/config.service';
-import { ReportService, REPORT_STRATEGIES } from './report.service';
+import { ReportsService, REPORT_STRATEGIES } from './reports.service';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../../guards/roles.guard';
 import { Roles } from '../../guards/roles.decorator';
@@ -13,9 +13,9 @@ interface ReportParams {
 @Controller('report')
 @UseGuards(RolesGuard)
 @UseGuards(AuthGuard())
-export class ReportController {
+export class ReportsController {
   constructor(
-    private readonly reportService: ReportService,
+    private readonly reportService: ReportsService,
     private readonly logger: Logger,
     private readonly config: ConfigService,
   ) {
