@@ -1,4 +1,4 @@
-import { Body, Controller, Logger, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { ConfigService } from '../../config/config.service';
 import { ReportsService, REPORT_STRATEGIES } from './reports.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -21,9 +21,9 @@ export class ReportsController {
   ) {
   }
 
-  @Post('/items')
-  @Roles('manager', 'analytics')
-  getItems(@Body() params: ReportParams, @Req() request) {
+  @Get('/item-sales')
+  @Roles('manager')
+  getItems(@Query() params: ReportParams, @Req() request) {
 
     params.siteId = _.get(request, ['user', 'organization', 'id'], '');
 
