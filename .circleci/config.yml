@@ -1,5 +1,12 @@
 version: 2
+
+defaults: &defaults
+  environment:
+    - DOCKER_IMAGE: "tabit.azurecr.io/reportserver"
+
 jobs:
+  checkout_code:
+    <<: *defaults
   build:
     docker:
       - image: circleci/node:6-browsers
