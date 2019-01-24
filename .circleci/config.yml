@@ -5,8 +5,9 @@ defaults: &defaults
     - DOCKER_IMAGE: "tabit.azurecr.io/reportserver"
 
 jobs:
-    <<: *defaults
+
   build:
+    <<: *defaults
     docker:
       - image: circleci/node:6-browsers
 
