@@ -1,6 +1,6 @@
 import { HttpModule, Logger, Module } from '@nestjs/common';
-import { ReportController } from './report.controller';
-import { ReportService } from './report.service';
+import { ReportsController } from './reports.controller';
+import { ReportsService } from './reports.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 
@@ -10,7 +10,7 @@ import { PassportModule } from '@nestjs/passport';
     TypeOrmModule,
     PassportModule.register({ defaultStrategy: 'bearer' }),
   ],
-  controllers: [ReportController],
-  providers: [ReportService, Logger]
+  controllers: [ReportsController],
+  providers: [ReportsService, Logger]
 })
-export class ReportModule {}
+export class ReportsModule {}

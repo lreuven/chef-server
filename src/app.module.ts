@@ -10,7 +10,7 @@ import { AuthModule } from './lib/auth/auth.module';
 import { RosService } from './services/ros/ros.service';
 import { ConfigModule } from './config/config.module';
 import {ConfigService} from './config/config.service';
-import { ReportModule } from './lib/report/report.module';
+import { ReportsModule } from './lib/reports/reports.module';
 const configService = (new ConfigService(process.env.NODE_ENV));
 @Module({
   imports: [
@@ -37,7 +37,7 @@ const configService = (new ConfigService(process.env.NODE_ENV));
     UsersModule,
     HttpModule,
     ConfigModule,
-    ReportModule,
+    ReportsModule,
   ],
   controllers: [AppController, DevController, UsersController],
   providers: [AppService, RosService, Logger],

@@ -9,7 +9,7 @@ export enum REPORT_STRATEGIES {
 }
 
 @Injectable()
-export class ReportService {
+export class ReportsService {
 
   constructor(
     @InjectConnection('dwh')

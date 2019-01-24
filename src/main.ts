@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as compression from 'compression';
-import { httpLoggerMiddleware } from './middleware/httpLogger.middleware';
+import { httpLoggerMiddleware } from './middleware/http-logger.middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
