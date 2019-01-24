@@ -21,8 +21,16 @@ export class UsersService {
       return user;
     }
     else {
-      const userAccount = await this.rosService.get(this.config.rosUrl + '/account/me', token);
-      const currentOrganization = await this.rosService.get(this.config.rosUrl + '/organizations/current', token);
+      let userAccount;
+      let currentOrganization;
+      try {
+        userAccount = await this.rosService.get(this.config.rosUrl + '/account/me', token);
+        currentOrganization = await this.rosService.get(this.config.rosUrl + '/organizations/current', token);
+      }
+      catch (e) {
+        return;
+      }
+
       user = _.get(userAccount, 'data');
       const organization = _.get(currentOrganization, 'data');
       if (user && organization) {
