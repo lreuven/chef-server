@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:6-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - run:
+          command: |
+            docker build -t tabit.azurecr.io/reportserver:1.0 .
+      - run:
+          command: |
+            docker login --username $DOCKER_USER --password $DOCKER_PASS tabit.azurecr.io
+      - run:
+          command: |
+            docker push tabit.azurecr.io/reportserver:1.0
