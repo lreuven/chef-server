@@ -5,7 +5,6 @@ defaults: &defaults
     - DOCKER_IMAGE: "tabit.azurecr.io/reportserver"
 
 jobs:
-  checkout_code:
     <<: *defaults
   build:
     docker:
