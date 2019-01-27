@@ -18,18 +18,6 @@ jobs:
       - checkout
       - run:
           command: |
-            cat .circleci/.azurek8s/kube_config
-      - run:
-          command: |
-            export KUBECONFIG=.circleci/.azurek8s/kube_config
-      - run:
-          command: |
-            echo ${KUBECONFIG}
-      - run:
-          command: |
-            ls -R
-      - run:
-          command: |
             curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
       - run:
           command: |
