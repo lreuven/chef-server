@@ -17,7 +17,7 @@ jobs:
       - run:
           command: |
             #cat .circleci/.azurek8s/kube_config
-            ls -a
+            ls -R
       - run:
           command: |
             curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
