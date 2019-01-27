@@ -5,7 +5,7 @@ export class AppService {
   constructor() {}
 
   async root() {
-    console.log(Date().toString());
+    console.log(Date.now().toString());
     return 'it\'s Alive!! !!!';
   }
 }
