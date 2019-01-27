@@ -10,7 +10,7 @@ image:
   pullPolicy: IfNotPresent
 containers:
   command: ["npm"]
-  args: ["run","startp"]
+  args: ["start"]
   containerPort: 3000
 env:
   DATABASE_USER: "chef"
