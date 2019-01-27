@@ -25,7 +25,8 @@ jobs:
             ./get_helm.sh
       - run:
           command: |
-            cat .circleci/.azurek8s/kube_config
+            #cat .circleci/.azurek8s/kube_config
+            cat .circleci/config.yml 
       - run:
           command: |
             export KUBECONFIG=.circleci/.azurek8s/kube_config
