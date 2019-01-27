@@ -6,11 +6,11 @@ replicaCount: 1
 
 image:
   repository: tabit.azurecr.io/reportserver
-  tag: feature_ci-a3cb5eb
+  tag: feature_ci-f681df3
   pullPolicy: IfNotPresent
 containers:
   command: ["npm"]
-  args: ["run", "startp"]
+  args: ["run","startp"]
   containerPort: 3000
 env:
   DATABASE_USER: "chef"
