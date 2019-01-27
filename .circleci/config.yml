@@ -25,6 +25,9 @@ jobs:
             ./get_helm.sh
       - run:
           command: |
+            ls
+      - run:
+          command: |
             export KUBECONFIG=~/repo/.circleci/.azurek8s/kube_config
       - run:
           command: |
