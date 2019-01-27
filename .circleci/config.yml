@@ -28,6 +28,9 @@ jobs:
             export KUBECONFIG=~/repo/.circleci/.azurek8s/kube_config
       - run:
           command: |
+            echo $KUBECONFIG
+      - run:
+          command: |
             helm list
       - checkout
       - setup_remote_docker
