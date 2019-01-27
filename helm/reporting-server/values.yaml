@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: tabit.azurecr.io/reportserver
-  tag: feature_ci-f681df3
+  tag: feature_ci-1ca3ce3
   pullPolicy: IfNotPresent
 containers:
   command: ["npm"]
