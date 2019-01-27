@@ -32,7 +32,7 @@ jobs:
 #      - run:
 #          command: |
 #            helm list
-      - checkout
+#      - checkout
       - setup_remote_docker
       - restore_cache:
           keys:
