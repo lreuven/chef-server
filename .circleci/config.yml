@@ -17,13 +17,15 @@ jobs:
       - checkout
       - run:
           command: |
+            cat .circleci/.azurek8s/kube_config
+      - run:
+          command: |
             export KUBECONFIG=.circleci/.azurek8s/kube_config
       - run:
           command: |
             echo "KUBECONFIG DATA: ${KUBECONFIG}"
       - run:
           command: |
-            #cat .circleci/.azurek8s/kube_config
             ls -R
       - run:
           command: |
