@@ -28,7 +28,7 @@ jobs:
             export KUBECONFIG=~/repo/.circleci/.azurek8s/kube_config
       - run:
           command: |
-            echo $KUBECONFIG
+            echo "KUBECONFIG DATA: ${KUBECONFIG}"
       - run:
           command: |
             helm list
