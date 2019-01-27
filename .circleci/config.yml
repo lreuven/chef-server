@@ -34,9 +34,9 @@ jobs:
 #            helm list
       - checkout
       - setup_remote_docker
-      - restore_cache:
-          keys:
-            - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+#      - restore_cache:
+#          keys:
+#            - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
