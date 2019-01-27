@@ -29,9 +29,9 @@ jobs:
       - run:
           command: |
             echo "KUBECONFIG DATA: ${KUBECONFIG}"
-      - run:
-          command: |
-            helm list
+#      - run:
+#          command: |
+#            helm list
       - checkout
       - setup_remote_docker
       - restore_cache:
