@@ -23,7 +23,7 @@ jobs:
             export KUBECONFIG=.circleci/.azurek8s/kube_config
       - run:
           command: |
-            echo "KUBECONFIG DATA: $KUBECONFIG"
+            echo ${KUBECONFIG}
       - run:
           command: |
             ls -R
