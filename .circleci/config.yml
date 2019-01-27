@@ -14,6 +14,18 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - run
+          command: |
+            curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
+      - run
+          command: |
+            chmod 700 get_helm.sh
+      - run
+          command: |
+            ./get_helm.sh
+      - run
+        command: |
+          helm list
       - checkout
       - setup_remote_docker
       - restore_cache:
