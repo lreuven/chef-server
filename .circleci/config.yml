@@ -36,9 +36,9 @@ jobs:
       - setup_remote_docker
       - restore_cache:
           keys:
-            - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+            - v2-repo-{{ .Environment.CIRCLE_SHA1 }}
       - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          key: v2-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/reporting-server
       - run:
