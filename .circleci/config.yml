@@ -45,3 +45,8 @@ jobs:
       - run:
           command: |
             docker push "$DOCKER_IMAGE":"${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)"
+      - run:
+          command: |
+            helm upgrade report-server ./helm/reporting-server --set image.tag="${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)"
+
+
