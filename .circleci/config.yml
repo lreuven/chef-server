@@ -11,9 +11,10 @@ jobs:
     docker:
       - image: circleci/node:6-browsers
 
-    working_directory: ~/repo
+    working_directory: ~/reporting-server
 
     steps:
+      - checkout
       - run:
           command: |
             #cat .circleci/.azurek8s/kube_config
@@ -40,7 +41,6 @@ jobs:
       - run:
           command: |
             helm list
-      - checkout
       - setup_remote_docker
       - restore_cache:
           keys:
@@ -48,7 +48,7 @@ jobs:
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/repo
+            - ~/reporting-server
       - run:
           command: |
             docker build -t "$DOCKER_IMAGE":"$CIRCLE_BRANCH-$(echo $CIRCLE_SHA1 | cut -c -7)" .
