@@ -6,6 +6,7 @@ import { httpLoggerMiddleware } from './middleware/http-logger.middleware';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: console,
+    cors: true
   });
 
   app.use(httpLoggerMiddleware);
