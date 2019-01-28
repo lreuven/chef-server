@@ -61,3 +61,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# If not specified, creates secrets
+#existingAirflowSecret: ""
