@@ -25,9 +25,6 @@ jobs:
       - run:
           command: |
             ./get_helm.sh
-      - run:
-          command: |
-            helm list
       - setup_remote_docker
       - restore_cache:
           keys:
