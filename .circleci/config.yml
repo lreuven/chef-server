@@ -1,6 +1,13 @@
 version: 2
+
+defaults: &defaults
+  environment:
+    - DOCKER_IMAGE: "tabit.azurecr.io/reportserver"
+
 jobs:
+
   build:
+    <<: *defaults
     docker:
       - image: circleci/node:6-browsers
 
@@ -9,10 +16,40 @@ jobs:
     steps:
       - run:
           command: |
-            docker build -t tabit.azurecr.io/reportserver:1.0 .
+            curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
+      - run:
+          command: |
+            chmod 700 get_helm.sh
+      - run:
+          command: |
+            ./get_helm.sh
+      - run:
+          command: |
+            cat .circleci/.azurek8s/kube_config
+      - run:
+          command: |
+            export KUBECONFIG=.circleci/.azurek8s/kube_config
+      - run:
+          command: |
+            echo "KUBECONFIG DATA: ${KUBECONFIG}"
+      - run:
+          command: |
+            helm list
+      - checkout
+      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/repo
+      - run:
+          command: |
+            docker build -t "$DOCKER_IMAGE":"$CIRCLE_BRANCH-$(echo $CIRCLE_SHA1 | cut -c -7)" .
       - run:
           command: |
             docker login --username $DOCKER_USER --password $DOCKER_PASS tabit.azurecr.io
       - run:
           command: |
-            docker push tabit.azurecr.io/reportserver:1.0
+            docker push "$DOCKER_IMAGE":"$CIRCLE_BRANCH-$(echo $CIRCLE_SHA1 | cut -c -7)"
