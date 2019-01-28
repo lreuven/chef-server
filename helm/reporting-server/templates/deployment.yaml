@@ -33,7 +33,12 @@ spec:
             - name: NODE_ENV
               value: {{.Values.env.NODE_ENV}}
             - name: DATABASE_PASSWORD
-              value: {{.Values.env.DATABASE_PASSWORD}}
+              valueFrom:
+                secretKeyRef:
+                  name: {{.Values.secret.name}}
+                  key: {{.Values.secret.key}}
+            #- name: DATABASE_PASSWORD
+            #  value: {{.Values.env.DATABASE_PASSWORD}}
             - name: DATABASE_NAME
               value: {{.Values.env.DATABASE_NAME}}
             - name: ROS_URL

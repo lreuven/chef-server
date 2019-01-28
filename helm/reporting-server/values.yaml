@@ -38,6 +38,11 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+secret:
+  name: data_password
+  key: DATABASE_PASSWORD
+  value: dmJYUzNXOXg5MmNkY0Q5Vg==
+
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
