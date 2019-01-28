@@ -39,7 +39,7 @@ ingress:
   #    hosts:
   #      - chart-example.local
 secret:
-  name: data_password
+  name: datapassword
   key: DATABASE_PASSWORD
   value: dmJYUzNXOXg5MmNkY0Q5Vg==
 
