@@ -23,7 +23,7 @@ fullnameOverride: ""
 
 service:
   type: ClusterIP
-  port: 
+  port: 80
   internalPort: 3000
 
 
