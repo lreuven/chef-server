@@ -37,7 +37,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
     #path: /status
   hosts:
-    - newserver.tabit-dev.com
+    -  report-server.tabit-dev.com
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
