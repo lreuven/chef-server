@@ -22,8 +22,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 service:
-  type: NodePort
-  port: 80
+  type: ClusterIP
+  #port: 80
   internalPort: 3000
 
 
@@ -36,7 +36,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
     #name: example
     #namespace: foo
-  paths: [/,/aaa,/bbb]
+  paths: [/srv]
   hosts:
     - chart-example.local
   tls: []
