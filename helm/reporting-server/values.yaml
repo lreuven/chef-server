@@ -22,7 +22,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 service:
-  type: LoadBalancer
+  type: NodePort
   port: 80
   internalPort: 3000
 
@@ -30,6 +30,8 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /
     # kubernetes.io/tls-acme: "true"
     #name: example
     #namespace: foo
