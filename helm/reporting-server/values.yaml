@@ -26,9 +26,9 @@ service:
   port: 80
   internalPort: 3000
 
-ingress:
-  enabled: flase
-  annotations:
+#ingress:
+#  enabled: flase
+#  annotations:
     #kubernetes.io/ingress.class: alb
     #alb.ingress.kubernetes.io/scheme: internet-facing
     #alb.ingress.kubernetes.io/tags: Environment=dev,Team=Tabit
@@ -36,9 +36,9 @@ ingress:
     #alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80,"HTTPS": 443}]'
     # kubernetes.io/tls-acme: "true"
     #path: /status
-  hosts:
-    -  report-server.tabit-dev.com
-  tls: []
+#  hosts:
+#    -  report-server.tabit-dev.com
+#  tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
