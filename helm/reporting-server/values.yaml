@@ -33,7 +33,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
     #name: example
     #namespace: foo
-  paths: []
+  paths: [/]
   hosts:
     - chart-example.local
   tls: []
