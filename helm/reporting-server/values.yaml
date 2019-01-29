@@ -32,10 +32,10 @@ ingress:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/tags: Environment=dev,Team=Tabit
-    #alb.ingress.kubernetes.io/healthcheck-path: /echostatus
+    alb.ingress.kubernetes.io/healthcheck-path: /
     #alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80,"HTTPS": 443}]'
     # kubernetes.io/tls-acme: "true"
-  #path: /status
+    #path: /status
   hosts:
     - newserver.tabit-dev.com
   tls: []
