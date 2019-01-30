@@ -14,7 +14,7 @@ spec:
       targetPort: {{ .Values.service.internalPort }}
       protocol: TCP
       name: http
-    - port: {{ .Values.service.httpPort }}
+    - port: {{ .Values.service.portHttp }}
       targetPort: {{ .Values.service.internalPort }}
       protocol: TCP
       name: https
