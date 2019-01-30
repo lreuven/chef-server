@@ -39,6 +39,7 @@ ingress:
   paths: [/srv]
   hosts:
     - tabitdns.eastus.cloudapp.azure.com
+    - forazure.tabit-dev.com
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
