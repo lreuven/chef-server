@@ -38,8 +38,7 @@ ingress:
     #namespace: foo
   paths: [/srv]
   hosts:
-  #  - tabitdns.eastus.cloudapp.azure.com
-    - 40.117.192.206
+    - tabitdns.eastus.cloudapp.azure.com
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
