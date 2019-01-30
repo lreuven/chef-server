@@ -26,6 +26,7 @@ spec:
   {{- end }}
 {{- end }}
   rules:
+################################################    -
   {{- range .Values.ingress.hosts }}
     - host: {{ . | quote }}
       http:
@@ -37,4 +38,17 @@ spec:
               servicePort: 80
 	{{- end }}
   {{- end }}
+########################################################
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . | quote }}
+      http:
+        paths:
+                {{- range $ingressPaths }}
+          - path: {{ . }}
+            backend:
+              serviceName: {{ $fullName }}
+              servicePort: 443
+    {{- end }}
+  {{- end }}
+################################################
 {{- end }}
