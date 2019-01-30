@@ -14,6 +14,10 @@ spec:
       targetPort: {{ .Values.service.internalPort }}
       protocol: TCP
       name: http
+    - port: {{ .Values.service.httpPort }}
+      targetPort: {{ .Values.service.internalPort }}
+      protocol: TCP
+      name: https
   selector:
     app.kubernetes.io/name: {{ include "reporting-server.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

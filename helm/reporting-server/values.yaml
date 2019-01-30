@@ -23,7 +23,8 @@ fullnameOverride: ""
 
 service:
   type: ClusterIP
-  port: 80,443
+  port: 80
+  httpPort: 443
   internalPort: 3000
 
 
