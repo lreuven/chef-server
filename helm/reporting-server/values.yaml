@@ -35,17 +35,19 @@ ingress:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/listen-ports: '[{"HTTP":80,"HTTPS": 443}]'
-    # kubernetes.io/tls-acme: "true"
+    kubernetes.io/tls-acme: "true"
     #name: example
     #namespace: foo
   paths: [/srv]
   hosts:
-    - tabitdns.eastus.cloudapp.azure.com
+    #- tabitdns.eastus.cloudapp.azure.com
     - forazure.tabit-dev.com
-  tls: []
-  #  - secretName: chart-example-tls
+  tls:
+    - secretName: aks-ingress-tls
   #    hosts:
   #      - chart-example.local
+
+#tlsSecret: print-tls
 
 secret:
   name: datapassword
