@@ -44,7 +44,7 @@ ingress:
     #- forazure.tabit-dev.com
     - tmpazure.tabit.cloud
   tls:
-    - secretName: aks-ingress-tls2
+    - secretName: aks-ingress-tls3
   #    hosts:
   #      - chart-example.local
 
