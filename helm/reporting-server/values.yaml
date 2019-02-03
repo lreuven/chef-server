@@ -41,13 +41,14 @@ ingress:
   paths: [/srv]
   hosts:
     #- tabitdns.eastus.cloudapp.azure.com
-    - forazure.tabit-dev.com
+    #- forazure.tabit-dev.com
+    - tmpazure.tabit.cloud
   tls:
     - secretName: aks-ingress-tls
   #    hosts:
   #      - chart-example.local
 
-#tlsSecret: print-tls
+tlsSecret: aks-ingress-tls2
 
 secret:
   name: datapassword
