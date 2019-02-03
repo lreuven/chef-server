@@ -45,7 +45,7 @@ ingress:
     - tmpazure.tabit.cloud
   tls:
     - secretName: aks-ingress-tls3
-  
+
 #tlsSecret: aks-ingress-tls2
 
 secret:
