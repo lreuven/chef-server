@@ -50,14 +50,10 @@ jobs:
             - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           command: |
-            ls -a
-      - run:
-          command: |
             chmod +x .circleci/deploy.sh
       - run:
           command: |
             .circleci/deploy.sh
-
 
 workflows:
   version: 2
