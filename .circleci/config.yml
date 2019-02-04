@@ -3,8 +3,6 @@ version: 2
 defaults: &defaults
   environment:
     - DOCKER_IMAGE: "tabit.azurecr.io/reportserver"
-    #- KUBECONFIG: .circleci/.azurek8s/kube_config
-
 jobs:
 
   build:
@@ -48,4 +46,3 @@ jobs:
       - run:
           command: |
             .circleci/deploy.sh
-
