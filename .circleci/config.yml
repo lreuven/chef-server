@@ -47,6 +47,9 @@ jobs:
     steps:
       - run:
           command: |
+            ls -a
+      - run:
+          command: |
             chmod +x .circleci/deploy.sh
       - run:
           command: |
