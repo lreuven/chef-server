@@ -44,6 +44,12 @@ jobs:
             docker push "$DOCKER_IMAGE":"${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)"
       - run:
           command: |
-            helm upgrade report-server ./helm/reporting-server --set image.tag="${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)"
+            git clone https://github.com/inPact/helm-live.git /tmp/helm-live
+      - run:
+          command: |
+            helm upgrade report-server ./tmp/helm-live/azure/dev/services/reporting-server --set image.tag="${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)"
+      #- run:
+      #    command: |
+      #      helm upgrade report-server ./helm/reporting-server --set image.tag="${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)"
 
 
