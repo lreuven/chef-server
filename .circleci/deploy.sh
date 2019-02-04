@@ -5,7 +5,7 @@ set -e
 
 function deploy () {
     local readonly live_path="$1"
-    git clone https://github.com/inPact/helm-live.git /tmp/helm-live
+    #git clone https://github.com/inPact/helm-live.git /tmp/helm-live
     #helm upgrade report-server /tmp/helm-live/azure/dev/services/reporting-server --set image.tag="${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)"
     helm upgrade report-server "$live_path" --set image.tag="${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)"
 }
