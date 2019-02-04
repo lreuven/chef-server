@@ -45,6 +45,7 @@ jobs:
   deploy:
     <<: *defaults
     steps:
+      - setup_remote_docker
       - restore_cache:
           keys:
             - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
