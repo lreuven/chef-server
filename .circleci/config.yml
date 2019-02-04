@@ -45,6 +45,9 @@ jobs:
   deploy:
     <<: *defaults
     steps:
+      - restore_cache:
+          keys:
+            - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           command: |
             ls -a
