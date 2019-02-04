@@ -45,11 +45,14 @@ jobs:
   deploy:
     <<: *defaults
     steps:
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - run:
+          name: Avoid hosts unknown for github
+          command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
       - restore_cache:
           keys:
             - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           command: |
             chmod +x .circleci/deploy.sh
