@@ -29,5 +29,5 @@ else
   echo "Did not find release tag or master branch, so skipping deploy."
   exit 0
 fi
-git config --global user.email "molywitman"
+#git config --global user.email "molywitman"
 deploy
