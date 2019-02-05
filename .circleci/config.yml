@@ -42,8 +42,10 @@ jobs:
 #          name: Avoid hosts unknown for github
 #          command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/reporting-server
       - run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
       - run: chmod 700 get_helm.sh
       - run: ./get_helm.sh
