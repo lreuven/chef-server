@@ -17,6 +17,7 @@ jobs:
       - run: git clone https://github.com/inPact/helm-live.git /tmp/helm-live
       - run: echo "before ls"
       - run: ls -a
+      - run: echo $PWD
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
