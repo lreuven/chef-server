@@ -46,6 +46,7 @@ jobs:
       - run:
           name: Avoid hosts unknown for github
           command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+      - run: git clone https://github.com/inPact/helm-live.git /tmp/helm-live
       - run: chmod +x .circleci/deploy.sh
       - run: .circleci/deploy.sh
 
