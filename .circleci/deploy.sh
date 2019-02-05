@@ -17,7 +17,9 @@ if [[ "$CIRCLE_TAG" =~ ^release-.*$ ]]; then
 elif [[ "$CIRCLE_BRANCH" == "master" ]]; then
  echo "On $CIRCLE_BRANCH branch. with $live_path"
 elif [[ "$CIRCLE_BRANCH" == "azure-dev" ]]; then #git push origin HEAD:azure-dev
+    echo "On 11111111111111"
     export KUBECONFIG="/tmp/helm-live/azure/dev/kube_config"
+    echo "2222222 $KUBECONFIG"
     export live_path="/tmp/helm-live/azure/dev/services/reporting-server"
 elif [[ "$CIRCLE_BRANCH" == "azure-int-il" ]]; then
     echo "On $CIRCLE_BRANCH branch. with $live_path"
