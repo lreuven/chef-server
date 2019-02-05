@@ -15,6 +15,7 @@ jobs:
       - run: echo "before  git ls"
       - run: ls -a
       - run: git clone https://github.com/inPact/helm-live.git /tmp/helm-live
+      - run: ls -lah /tmp
       - run: echo "before ls"
       - run: ls -a
       - run: echo $PWD
