@@ -12,6 +12,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: git clone https://github.com/inPact/helm-live.git /tmp/helm-live
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
@@ -45,7 +46,6 @@ jobs:
 #      - run:
 #          name: Avoid hosts unknown for github
 #          command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-      - run: git clone https://github.com/inPact/helm-live.git /tmp/helm-live
       - run: chmod +x .circleci/deploy.sh
       - run: .circleci/deploy.sh
 
