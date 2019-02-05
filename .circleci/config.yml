@@ -14,7 +14,7 @@ jobs:
       - checkout
       - run: echo "before  git ls"
       - run: ls -a
-      - run: git clone https://github.com/inPact/helm-live.git /tmp/helm-live
+#      - run: git clone https://github.com/inPact/helm-live.git /tmp/helm-live
       - run: ls -lah /tmp
       - run: echo "before ls"
       - run: ls -a
@@ -49,9 +49,7 @@ jobs:
       - run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
       - run: chmod 700 get_helm.sh
       - run: ./get_helm.sh
-#      - run:
-#          name: Avoid hosts unknown for github
-#          command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+      - run: git clone https://github.com/inPact/helm-live.git /tmp/helm-live
       - run: chmod +x .circleci/deploy.sh
       - run: .circleci/deploy.sh
 
