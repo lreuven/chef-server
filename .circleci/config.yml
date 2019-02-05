@@ -13,6 +13,8 @@ jobs:
     steps:
       - checkout
       - run: git clone https://github.com/inPact/helm-live.git /tmp/helm-live
+      - run: echo "before ls"
+      - run: ls -a
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
