@@ -31,14 +31,16 @@ jobs:
   deploy:
     <<: *defaults
     steps:
-      - checkout
+      - checkout # needed because git connection
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/reporting-server
+      # start helm install
       - run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
       - run: chmod 700 get_helm.sh
       - run: ./get_helm.sh
+      # end helm install
       - run: chmod +x .circleci/deploy.sh
       - run: .circleci/deploy.sh
 
@@ -52,7 +54,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - dev
+                - develop
                 - verification
                 - /feature.*/
             tags:
@@ -61,7 +63,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - dev
+                - develop
                 - verification
                 - /feature.*/
             tags:
@@ -73,7 +75,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - dev
+                - develop
                 - verification
                 - /feature.*/
             tags:
