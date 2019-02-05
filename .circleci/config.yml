@@ -50,6 +50,7 @@ jobs:
       - run: chmod 700 get_helm.sh
       - run: ./get_helm.sh
       - run: git clone https://github.com/inPact/helm-live.git /tmp/helm-live
+      - run: ls ls -lah /tmp
       - run: chmod +x .circleci/deploy.sh
       - run: .circleci/deploy.sh
 
