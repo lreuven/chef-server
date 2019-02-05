@@ -29,5 +29,9 @@ else
   echo "Did not find release tag or master branch, so skipping deploy."
   exit 0
 fi
-#git config --global user.email "molywitman"
+
+# All commits will be from the machine user
+git config --global user.name "tabit-ci"
+git config --global user.email "jim+tabit-ci@gruntwork.io"
+git config --global push.default simple
 deploy
