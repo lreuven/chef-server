@@ -33,10 +33,10 @@ jobs:
   deploy:
     <<: *defaults
     steps:
-      - run:
-          name: Avoid hosts unknown for github
-          command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-      - setup_remote_docker    
+#      - run:
+#          name: Avoid hosts unknown for github
+#          command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+      - setup_remote_docker
       - restore_cache:
           keys:
             - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
