@@ -53,12 +53,8 @@ jobs:
             - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 #      - setup_remote_docker:
 #          docker_layer_caching: true
-      - run:
-          command: |
-            chmod +x .circleci/deploy.sh
-      - run:
-          command: |
-            .circleci/deploy.sh
+      - run: chmod +x .circleci/deploy.sh
+      - run: .circleci/deploy.sh
 
 workflows:
   version: 2
