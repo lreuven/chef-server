@@ -5,7 +5,7 @@ set -e
 
 function deploy () {
     git clone https://github.com/inPact/helm-live.git /tmp/helm-live
-    helm upgrade report-server "$live_path" --set image.tag="${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)"
+    helm upgrade report-server "$live_path"  --values "$values_file" --set image.tag="${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)"
     echo "Helm $CIRCLE_BRANCH branch. with $live_path"
 }
 # ====================================================================================================================
@@ -17,7 +17,9 @@ elif [[ "$CIRCLE_BRANCH" == "master" ]]; then
  echo "On $CIRCLE_BRANCH branch. with $live_path"
 elif [[ "$CIRCLE_BRANCH" == "azure-dev" ]]; then #git push origin HEAD:azure-dev
     export KUBECONFIG="/tmp/helm-live/azure/dev/kube_config"
-    export live_path="/tmp/helm-live/azure/dev/services/reporting-server"
+    #export live_path="/tmp/helm-live/azure/dev/services/reporting-server"
+    export live_path="/tmp/helm-live/reporting-server"
+    export values_file="values-dev.yaml"
 elif [[ "$CIRCLE_BRANCH" == "azure-int-il" ]]; then
     echo "On $CIRCLE_BRANCH branch. with $live_path"
 elif [[ "$CIRCLE_BRANCH" == "azure-stage-il" ]]; then
