@@ -25,6 +25,9 @@ elif [[ "$CIRCLE_BRANCH" == "azure-int-il" ]]; then
 elif [[ "$CIRCLE_BRANCH" == "azure-stage-il" ]]; then
     echo "On $CIRCLE_BRANCH branch. with $live_path"
 elif [[ "$CIRCLE_BRANCH" == "azure-prd-il" ]]; then
+    export KUBECONFIG="/tmp/helm-live/azure/prd-il/kube_config"
+    export live_path="/tmp/helm-live/azure/reporting-server"
+    export values_file="/tmp/helm-live/azure/prd-il/default/services/report-server/values.yaml"
    echo "On $CIRCLE_BRANCH branch. with $live_path"
 else
   echo "Did not find release tag or master branch, so skipping deploy."
