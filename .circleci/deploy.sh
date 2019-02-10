@@ -25,7 +25,7 @@ elif [[ "$CIRCLE_BRANCH" == "azure-int-il" ]]; then
 elif [[ "$CIRCLE_BRANCH" == "azure-stage-il" ]]; then
     echo "On $CIRCLE_BRANCH branch. with $live_path"
 elif [[ "$CIRCLE_BRANCH" == "azure-prd-il" ]]; then #git push origin HEAD:azure-prd-il
-    export KUBECONFIG="/tmp/helm-live/azure/prd-il/kube_config"
+    export KUBECONFIG="/tmp/helm-live/azure/prd-il/aks/kube_config"
     export live_path="/tmp/helm-live/azure/reporting-server"
     export values_file="/tmp/helm-live/azure/prd-il/default/services/report-server/values.yaml"
    echo "On $CIRCLE_BRANCH branch. with $live_path"
