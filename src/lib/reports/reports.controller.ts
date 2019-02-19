@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 
 interface ReportParams {
   siteId: string;
+  action: string;
 }
 
 @Controller('report')
@@ -24,9 +25,23 @@ export class ReportsController {
   @Get('/item-sales')
   @Roles('manager')
   getItems(@Query() params: ReportParams, @Req() request) {
-
     params.siteId = _.get(request, ['user', 'organization', 'id'], '');
-
     return this.reportService.getReport('stp_ReportItems', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
+  @Get('/payments')
+  @Roles('manager')
+  getPayments(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'payments';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
+  @Get('/categories')
+  @Roles('manager')
+  getCategories(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'categories';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 }

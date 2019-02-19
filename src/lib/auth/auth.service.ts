@@ -6,7 +6,7 @@ import {Logger} from '@nestjs/common';
 export class AuthService {
   constructor(private readonly usersService: UsersService, private readonly logger: Logger) {}
 
-  async getUser(token: string): Promise<any> {
-    return await this.usersService.findOneByToken(token);
+  getUser(token: string): Promise<any> {
+    return this.usersService.findOneByToken(token);
   }
 }
