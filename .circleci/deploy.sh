@@ -47,7 +47,7 @@ elif [[ "$CIRCLE_BRANCH" == "azure-il-int" ]]; then #git push origin HEAD:azure-
     export namespace="int-il"
     export name=il-int-report-server
    echo "On $CIRCLE_BRANCH branch. with $live_path"
-elif [[ "$CIRCLE_BRANCH" == "azure-il-stg" ]]; then #git push origin HEAD:azure-il-int
+elif [[ "$CIRCLE_BRANCH" == "azure-il-stg" ]]; then #git push origin HEAD:azure-il-stg
     export KUBECONFIG="/tmp/helm-live/azure/dev/aks/kube_config"  #TO DO check if need to change
     export live_path="/tmp/helm-live/azure/reporting-server"
     export values_file="/tmp/helm-live/azure/dev/il-stg/services/report-server/values.yaml"
