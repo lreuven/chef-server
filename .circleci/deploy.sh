@@ -44,14 +44,14 @@ elif [[ "$CIRCLE_BRANCH" == "azure-il-int" ]]; then #git push origin HEAD:azure-
     export KUBECONFIG="/tmp/helm-live/azure/dev/aks/kube_config"  #TO DO check if need to change
     export live_path="/tmp/helm-live/azure/reporting-server"
     export values_file="/tmp/helm-live/azure/dev/il-int/services/report-server/values.yaml"
-    export namespace="int-il"
+    export namespace="il-int"
     export name=il-int-report-server
    echo "On $CIRCLE_BRANCH branch. with $live_path"
 elif [[ "$CIRCLE_BRANCH" == "azure-il-stg" ]]; then #git push origin HEAD:azure-il-stg
     export KUBECONFIG="/tmp/helm-live/azure/dev/aks/kube_config"  #TO DO check if need to change
     export live_path="/tmp/helm-live/azure/reporting-server"
     export values_file="/tmp/helm-live/azure/dev/il-stg/services/report-server/values.yaml"
-    export namespace="stg-il"
+    export namespace="il-stg"
     export name=il-stg-report-server
    echo "On $CIRCLE_BRANCH branch. with $live_path"
 ##################################################################
@@ -59,15 +59,15 @@ elif [[ "$CIRCLE_BRANCH" == "azure-us-int" ]]; then #git push origin HEAD:azure-
     export KUBECONFIG="/tmp/helm-live/azure/dev/aks/kube_config"  #TO DO check if need to change
     export live_path="/tmp/helm-live/azure/reporting-server"
     export values_file="/tmp/helm-live/azure/dev/us-int/services/report-server/values.yaml"
-    export namespace="int-us"
+    export namespace="us-int"
     export name=us-int-report-server
    echo "On $CIRCLE_BRANCH branch. with $live_path"
-elif [[ "$CIRCLE_BRANCH" == "azure-us-stg" ]]; then #git push origin HEAD:azure-il-stg
+elif [[ "$CIRCLE_BRANCH" == "azure-us-stg" ]]; then #git push origin HEAD:azure-us-stg
     export KUBECONFIG="/tmp/helm-live/azure/dev/aks/kube_config"  #TO DO check if need to change
     export live_path="/tmp/helm-live/azure/reporting-server"
-    export values_file="/tmp/helm-live/azure/dev/il-stg/services/report-server/values.yaml"
-    export namespace="int-stg"
-    export name=il-stg-report-server
+    export values_file="/tmp/helm-live/azure/dev/us-stg/services/report-server/values.yaml"
+    export namespace="us-stg"
+    export name=us-stg-report-server
    echo "On $CIRCLE_BRANCH branch. with $live_path"
 
 else
