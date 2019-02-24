@@ -18,7 +18,7 @@ const configService = (new ConfigService(process.env.NODE_ENV));
     TypeOrmModule.forRoot({
       name: 'dwh',
       type: 'mssql',
-      host: 'wallettabit.database.windows.net',
+      host: configService.databaseHost,
       port: 1433,
       username: configService.databaseUser,
       password: configService.databasePassword,

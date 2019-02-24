@@ -27,6 +27,7 @@ export class ConfigService {
         .valid(['development', 'production', 'local'])
         .default('local'),
       PORT: Joi.number().default(3000),
+      DATABASE_HOST: Joi.string().required(),
       DATABASE_USER: Joi.string().required(),
       DATABASE_PASSWORD: Joi.string().required(),
       DATABASE_NAME: Joi.string().required(),
@@ -41,6 +42,10 @@ export class ConfigService {
       throw new Error(`Config validation error: ${error.message}`);
     }
     return validatedEnvConfig;
+  }
+
+  get databaseHost(): string {
+    return this.envConfig.DATABASE_HOST;
   }
 
   get databaseName(): string {
