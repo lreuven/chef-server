@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Logger, Post, Query, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post, Query, Req, UseFilters, UseGuards } from '@nestjs/common';
 import { ConfigService } from '../../config/config.service';
 import { ReportsService, REPORT_STRATEGIES } from './reports.service';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../../guards/roles.guard';
 import { Roles } from '../../guards/roles.decorator';
 import * as _ from 'lodash';
+import { AllExceptionsFilter } from '../../filters/exception.filter';
 
 interface ReportParams {
   siteId: string;
@@ -14,6 +15,7 @@ interface ReportParams {
 @Controller('report')
 @UseGuards(RolesGuard)
 @UseGuards(AuthGuard())
+@UseFilters(new AllExceptionsFilter())
 export class ReportsController {
   constructor(
     private readonly reportService: ReportsService,

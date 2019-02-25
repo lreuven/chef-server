@@ -14,13 +14,14 @@ export class ReportsService {
   constructor(
     @InjectConnection('dwh')
     private readonly connection: Connection,
-  ){}
+  ) {
+  }
 
   async getReport(name, params, strategy: REPORT_STRATEGIES) {
     switch (strategy) {
       case REPORT_STRATEGIES.STORED_PROCEDURE:
-        const response = await this.connection.query('EXEC ' + name + ' @jsonCreteria = N\'' + JSON.stringify(params) + '\'');
-        return JSON.parse(_.first(_.values(_.first(response))));
+        const queryResponse = await this.connection.query('EXEC ' + name + ' @jsonCreteria = N\'' + JSON.stringify(params) + '\'');
+        return JSON.parse(_.first(_.values(_.first(queryResponse))));
       default:
         throw new HttpException({
           status: HttpStatus.BAD_REQUEST,
