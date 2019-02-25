@@ -31,9 +31,9 @@ export class ReportsController {
     return this.reportService.getReport('stp_ReportItems', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 
-  @Get('/sales')
+  @Get('/salesByOrganizationAndUser')
   @Roles('manager')
-  getSales(@Query() params: ReportParams, @Req() request) {
+  getSalesByUser(@Query() params: ReportParams, @Req() request) {
     params.siteId = _.get(request, ['user', 'organization', 'id'], '');
     return this.reportService.getReport('stp_ApiSalesAndTips', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
