@@ -11,7 +11,7 @@ async function bootstrap() {
 
   app.use(httpLoggerMiddleware);
   app.use(compression());
-
+  console.log('app.listen(3000)');
   await app.listen(3000);
 }
 bootstrap();
