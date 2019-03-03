@@ -52,6 +52,7 @@ jobs:
       #- run: chmod 700 get_helm.sh
       #- run: ./get_helm.sh
       # end helm install
+
       - run: chmod +x .circleci/deploy.sh
       - run: .circleci/deploy.sh
 
