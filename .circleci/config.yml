@@ -5,6 +5,7 @@ defaults: &defaults
     - image: circleci/node:6-browsers
   environment:
     - DOCKER_IMAGE: "tabit.azurecr.io/reportserver"
+    - HELM_VERSION: v2.12.2  # Same as helm provider
   working_directory: ~/reporting-server
 jobs:
 
@@ -36,10 +37,20 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/reporting-server
+
+      - run:
+          name: install helm
+          command: |
+          # install helm
+            curl -Lo helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz
+            tar -xvf helm.tar.gz
+            chmod +x linux-amd64/helm
+            sudo mv linux-amd64/helm /usr/local/bin/
+
       # start helm install
-      - run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
-      - run: chmod 700 get_helm.sh
-      - run: ./get_helm.sh
+      #- run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
+      #- run: chmod 700 get_helm.sh
+      #- run: ./get_helm.sh
       # end helm install
       - run: chmod +x .circleci/deploy.sh
       - run: .circleci/deploy.sh
