@@ -44,4 +44,43 @@ export class ReportsController {
     params.action = 'categories';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
+
+  @Get('/tlogs')
+  @Roles('manager')
+  getTlogs(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'tlogs';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
+  @Get('/refund')
+  @Roles('manager')
+  getRefund(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'refund';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+  @Get('/reductionByReason')
+  @Roles('manager')
+  getReductionByReason(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'reductionByReason';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+    }
+
+  @Get('/reductionByfiredBy')
+  @Roles('manager')
+  getReductionByFired(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'reductionByfiredBy';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
+  @Get('/mostLeastSoldItems')
+  @Roles('manager')
+  getMostLeastSoldItems(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'mostLeastSoldItems';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
 }
