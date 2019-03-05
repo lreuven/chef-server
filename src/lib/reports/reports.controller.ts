@@ -83,4 +83,15 @@ export class ReportsController {
     params.action = 'mostLeastSoldItems';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
+
+  @Get('/ReductionItemsByReason')
+  @Roles('manager')
+  getReductionByReasondialog(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'ReductionByReason';
+
+    _.set(params, 'items', JSON.parse(_.get(params, 'items')));
+
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
 }
