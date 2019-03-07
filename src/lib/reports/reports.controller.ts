@@ -95,7 +95,7 @@ export class ReportsController {
 
   @Get('/ReductionItemsByReason')
   @Roles('manager')
-  getReductionByReasondialog(@Query() params: ReportParams, @Req() request) {
+  getReductionItemsByReason(@Query() params: ReportParams, @Req() request) {
     params.siteId = _.get(request, ['user', 'organization', 'id'], '');
     params.action = 'ReductionByReason';
 
@@ -106,7 +106,7 @@ export class ReportsController {
 
   @Get('/reductionByfiredBy')
   @Roles('manager')
-  getReductionByFiredDialog(@Query() params: ReportParams, @Req() request) {
+  getReductionItemsByFired(@Query() params: ReportParams, @Req() request) {
     params.siteId = _.get(request, ['user', 'organization', 'id'], '');
     params.action = 'ReductionByFiredBy';
 
