@@ -10,6 +10,7 @@ import { AllExceptionsFilter } from '../../filters/exception.filter';
 interface ReportParams {
   siteId: string;
   action: string;
+  filters: string;
 }
 
 @Controller('report')
@@ -114,4 +115,14 @@ export class ReportsController {
 
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
+
+  @Get('/mostLeastSoldItems')
+  @Roles('manager')
+  getFiltersTest(@Query() params: ReportParams, filters) {
+    params.filters = filters;
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
+
+
 }
