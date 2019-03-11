@@ -20,7 +20,8 @@ export class RolesGuard implements CanActivate {
 
     const memberships = _.filter(user.memberships, { active: true });
     const currentMembership = _.find(memberships, {organization: user.organization.id});
-    const hasRole = currentMembership && roles.indexOf(currentMembership.role) !== -1;
+    const role = _.get(currentMembership, 'role');
+    const hasRole = currentMembership && roles.indexOf(role) !== -1;
     return user && hasRole;
   }
 }
