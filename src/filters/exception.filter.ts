@@ -7,7 +7,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
-    const status = typeof exception.getStatus === 'function' ? exception.getStatus() : 403;
+    const status = typeof exception.getStatus === 'function' ? exception.getStatus() : 409;
 
     response
       .status(status)
