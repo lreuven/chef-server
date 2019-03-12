@@ -10,6 +10,7 @@ import { AllExceptionsFilter } from '../../filters/exception.filter';
 interface ReportParams {
   siteId: string;
   action: string;
+  filters: string;
 }
 
 @Controller('report')
@@ -92,4 +93,35 @@ export class ReportsController {
     params.action = 'mostLeastSoldItems';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
+
+  @Get('/ReductionItemsByReason')
+  @Roles('manager')
+  getReductionItemsByReason(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'ReductionByReason';
+
+    _.set(params, 'filters', JSON.parse(_.get(params, 'filters')));
+
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
+  @Get('/reductionItemsByfiredBy')
+  @Roles('manager')
+  getReductionItemsByFired(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'ReductionByFiredBy';
+
+    _.set(params, 'filters', JSON.parse(_.get(params, 'filters')));
+
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
+  @Get('/mostReturnItems')
+  @Roles('manager')
+  getMostLeastReturnsItems(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'mostLeastReturnsItems';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
 }
