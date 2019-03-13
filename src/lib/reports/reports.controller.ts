@@ -26,6 +26,7 @@ export class ReportsController {
   }
 
   @Get('/item-sales')
+  @Get('/itemSales')
   @Roles('manager')
   getItems(@Query() params: ReportParams, @Req() request) {
     params.siteId = _.get(request, ['user', 'organization', 'id'], '');
@@ -37,6 +38,17 @@ export class ReportsController {
   getSalesByUser(@Query() params: ReportParams, @Req() request) {
     params.siteId = _.get(request, ['user', 'organization', 'id'], '');
     return this.reportService.getReport('stp_ApiSalesAndTips', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
+  @Get('/budgetDeductions')
+  @Roles('manager')
+  getbudgetDeductions(@Req() request) {
+    const params = {
+      siteId: _.get(request, ['user', 'organization', 'id'], ''),
+      action: 'AvgReductionForBudget'
+    };
+
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 
   @Get('/payments')
