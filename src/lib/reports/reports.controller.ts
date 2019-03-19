@@ -130,9 +130,17 @@ export class ReportsController {
 
   @Get('/mostReturnItems')
   @Roles('manager')
-  getMostLeastReturnsItems(@Query() params: ReportParams, @Req() request) {
+  getMostReturnItems(@Query() params: ReportParams, @Req() request) {
     params.siteId = _.get(request, ['user', 'organization', 'id'], '');
-    params.action = 'mostLeastReturnsItems';
+    params.action = 'MostReturnItems';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
+  @Get('/hqChefHomePage')
+  @Roles('manager')
+  gethqChefHomePage(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'hqChefHomePage';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 
