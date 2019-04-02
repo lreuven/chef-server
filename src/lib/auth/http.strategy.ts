@@ -1,16 +1,17 @@
 import { Strategy } from 'passport-http-bearer';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Reflector } from '@nestjs/core';
+import * as _ from 'lodash';
 
 @Injectable()
 export class HttpStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly authService: AuthService, private readonly reflector: Reflector) {
+
+  constructor(private readonly authService: AuthService) {
     super();
   }
 
-  async validate(token: string) {
+  async validate(token: string, context: ExecutionContext) {
     const user = await this.authService.getUser(token);
     if (!user) {
       throw new UnauthorizedException();

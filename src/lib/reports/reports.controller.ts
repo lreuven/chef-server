@@ -3,6 +3,7 @@ import { ConfigService } from '../../config/config.service';
 import { ReportsService, REPORT_STRATEGIES } from './reports.service';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../../guards/roles.guard';
+import { RosGuard } from '../../guards/ros.guard';
 import { Roles } from '../../guards/roles.decorator';
 import * as _ from 'lodash';
 import { AllExceptionsFilter } from '../../filters/exception.filter';
@@ -15,7 +16,7 @@ interface ReportParams {
 
 @Controller('report')
 @UseGuards(RolesGuard)
-@UseGuards(AuthGuard())
+@UseGuards(RosGuard)
 @UseFilters(new AllExceptionsFilter())
 export class ReportsController {
   constructor(
