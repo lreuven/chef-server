@@ -3,6 +3,7 @@ import { ConfigService } from '../../config/config.service';
 import { ReportsService, REPORT_STRATEGIES } from './reports.service';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../../guards/roles.guard';
+import { RosGuard } from '../../guards/ros.guard';
 import { Roles } from '../../guards/roles.decorator';
 import * as _ from 'lodash';
 import { AllExceptionsFilter } from '../../filters/exception.filter';
@@ -15,7 +16,7 @@ interface ReportParams {
 
 @Controller('report')
 @UseGuards(RolesGuard)
-@UseGuards(AuthGuard())
+@UseGuards(RosGuard)
 @UseFilters(new AllExceptionsFilter())
 export class ReportsController {
   constructor(
@@ -26,6 +27,7 @@ export class ReportsController {
   }
 
   @Get('/item-sales')
+  @Get('/itemSales')
   @Roles('manager')
   getItems(@Query() params: ReportParams, @Req() request) {
     params.siteId = _.get(request, ['user', 'organization', 'id'], '');
@@ -37,6 +39,17 @@ export class ReportsController {
   getSalesByUser(@Query() params: ReportParams, @Req() request) {
     params.siteId = _.get(request, ['user', 'organization', 'id'], '');
     return this.reportService.getReport('stp_ApiSalesAndTips', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
+  @Get('/budgetDeductions')
+  @Roles('manager')
+  getbudgetDeductions(@Req() request) {
+    const params = {
+      siteId: _.get(request, ['user', 'organization', 'id'], ''),
+      action: 'AvgReductionForBudget'
+    };
+
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 
   @Get('/payments')
@@ -129,6 +142,14 @@ export class ReportsController {
   gethqChefHomePage(@Query() params: ReportParams, @Req() request) {
     params.siteId = _.get(request, ['user', 'organization', 'id'], '');
     params.action = 'hqChefHomePage';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
+  @Get('/refund')
+  @Roles('manager')
+  getRefuned(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'refund';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 
