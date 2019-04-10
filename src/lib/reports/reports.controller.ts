@@ -52,6 +52,17 @@ export class ReportsController {
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 
+  @Get('/averageDeductionsByShift')
+  @Roles('manager')
+  getAverageDeductionsByShift(@Req() request) {
+    const params = {
+      siteId: _.get(request, ['user', 'organization', 'id'], ''),
+      action: 'AvgReductionForBudget_dev'
+    };
+
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
   @Get('/payments')
   @Roles('manager')
   getPayments(@Query() params: ReportParams, @Req() request) {
