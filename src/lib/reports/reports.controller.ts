@@ -30,14 +30,14 @@ export class ReportsController {
   @Get('/itemSales')
   @Roles('manager')
   getItems(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     return this.reportService.getReport('stp_ReportItems', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 
   @Get('/salesByOrganizationAndUser')
   @Roles('manager')
   getSalesByUser(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     return this.reportService.getReport('stp_ApiSalesAndTips', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 
@@ -45,8 +45,8 @@ export class ReportsController {
   @Roles('manager')
   getbudgetDeductions(@Req() request) {
     const params = {
-      siteId: _.get(request, ['user', 'organization', 'id'], ''),
-      action: 'AvgReductionForBudget'
+      siteId: this._getOrganizationId(request),
+      action: 'AvgReductionForBudget',
     };
 
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
@@ -56,12 +56,12 @@ export class ReportsController {
   @Roles('manager')
   getAverageDeductionsByShift(@Req() request, @Query() query) {
     const params = _.assign({
-      siteId: _.get(request, ['user', 'organization', 'id'], ''),
-      action: 'AvgReductionForBudget_dev'
+      siteId: this._getOrganizationId(request),
+      action: 'AvgReductionForBudget_dev',
     }, _.pick(query, [
       'employeesPeriod', 'employeesType', 'fromTime', 'mrPeriod', 'mrType',
       'operationalPeriod', 'operationalType', 'salesPeriod', 'salesType',
-      'toTime', 'voidsPeriod', 'voidsType', 'wastePeriod', 'wasteType'
+      'toTime', 'voidsPeriod', 'voidsType', 'wastePeriod', 'wasteType',
     ]));
 
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
@@ -70,7 +70,7 @@ export class ReportsController {
   @Get('/payments')
   @Roles('manager')
   getPayments(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     params.action = 'payments';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
@@ -78,7 +78,7 @@ export class ReportsController {
   @Get('/categories')
   @Roles('manager')
   getCategories(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     params.action = 'categories';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
@@ -86,7 +86,7 @@ export class ReportsController {
   @Get('/tlogs')
   @Roles('manager')
   getTlogs(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     params.action = 'tlogs';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
@@ -94,22 +94,23 @@ export class ReportsController {
   @Get('/refund')
   @Roles('manager')
   getRefund(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     params.action = 'refund';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
+
   @Get('/reductionByReason')
   @Roles('manager')
   getReductionByReason(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     params.action = 'reductionByReason';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
-    }
+  }
 
   @Get('/reductionByfiredBy')
   @Roles('manager')
   getReductionByFired(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     params.action = 'reductionByfiredBy';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
@@ -117,7 +118,7 @@ export class ReportsController {
   @Get('/mostLeastSoldItems')
   @Roles('manager')
   getMostLeastSoldItems(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     params.action = 'mostLeastSoldItems';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
@@ -125,7 +126,7 @@ export class ReportsController {
   @Get('/ReductionItemsByReason')
   @Roles('manager')
   getReductionItemsByReason(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     params.action = 'ReductionByReason';
 
     _.set(params, 'filters', JSON.parse(_.get(params, 'filters')));
@@ -136,7 +137,7 @@ export class ReportsController {
   @Get('/reductionItemsByfiredBy')
   @Roles('manager')
   getReductionItemsByFired(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     params.action = 'ReductionByFiredBy';
 
     _.set(params, 'filters', JSON.parse(_.get(params, 'filters')));
@@ -147,7 +148,7 @@ export class ReportsController {
   @Get('/mostReturnItems')
   @Roles('manager')
   getMostReturnItems(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     params.action = 'MostReturnItems';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
@@ -163,9 +164,12 @@ export class ReportsController {
   @Get('/refund')
   @Roles('manager')
   getRefuned(@Query() params: ReportParams, @Req() request) {
-    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.siteId = this._getOrganizationId(request);
     params.action = 'refund';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 
+  _getOrganizationId(request) {
+    return _.get(request, 'headers.ros-organization', _.get(request, 'user.organization.id', ''));
+  }
 }
