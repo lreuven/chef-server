@@ -168,6 +168,9 @@ export class ReportsController {
     params.action = 'refund';
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
+  _getOrganizationId(request) {
+    return _.get(request, 'headers.ros-organization', _.get(request, 'user.organization.id', ''));
+  }
 
   @Get('/tabitChefsiteMonthly')
   @Roles('manager')
