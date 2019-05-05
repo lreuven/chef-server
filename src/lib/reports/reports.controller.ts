@@ -153,4 +153,12 @@ export class ReportsController {
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 
+  @Get('/tabitChefsiteMonthly')
+  @Roles('manager')
+  getSales(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'tabitChefsiteMonthly';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
+  }
+
 }
