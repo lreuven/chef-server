@@ -169,7 +169,12 @@ export class ReportsController {
     return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
 
-  _getOrganizationId(request) {
-    return _.get(request, 'headers.ros-organization', _.get(request, 'user.organization.id', ''));
+  @Get('/tabitChefsiteMonthly')
+  @Roles('manager')
+  getSales(@Query() params: ReportParams, @Req() request) {
+    params.siteId = _.get(request, ['user', 'organization', 'id'], '');
+    params.action = 'tabitChefsiteMonthly';
+    return this.reportService.getReport('stp_getdwhDataApi', params, REPORT_STRATEGIES.STORED_PROCEDURE);
   }
+
 }
