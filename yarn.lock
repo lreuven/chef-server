@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+  dsn: 'https://34272539600044d894552d62c814f98a@o409427.ingest.sentry.io/5340604',
+
+
+
 "@babel/code-frame@^7.0.0-beta.35":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
