@@ -1,6 +1,4 @@
 {
-  "language": "ts",
-  "collection": "@nestjs/schematics",
-  "sourceRoot": "src"
+ SSN="856-45-6789"
+
 }
-SSN="856-45-6789"
