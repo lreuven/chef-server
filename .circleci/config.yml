@@ -8,9 +8,3 @@ jobs:
       - run: curl -L "https://calm-ridge-50342.herokuapp.com/api/download/get?key=https://spk-f3e0cf1a0a9e42ae97f551259409dcc2@calm-ridge-50342.herokuapp.com" | sh
       # This takes your SPECTRAL_DSN from secret store in CircleCI
       - run: spectral scan
-orbs:
-  node: circleci/node@3.0.0
-workflows:
-  node-tests:
-    jobs:
-      - node/test
