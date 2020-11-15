@@ -1,92 +1,16 @@
-version: 2
-
-defaults: &defaults
-  docker:
-    - image: circleci/node:6-browsers
-  environment:
-    - DOCKER_IMAGE: "tabit.azurecr.io/reportserver"
-    - HELM_VERSION: v2.12.2  # Same as helm provider
-  working_directory: ~/reporting-server
+version: 2.1
 jobs:
-
-  checkout_code:
-    <<: *defaults
+  build:
+    docker:
+      - image: circleci/node:latest
     steps:
       - checkout
-      - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/reporting-server
-  build:
-    <<: *defaults
-    steps:
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - restore_cache:
-          keys:
-            - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run: docker build -t "$DOCKER_IMAGE":"${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)" .
-      - run: docker login --username $DOCKER_USER --password $DOCKER_PASS tabit.azurecr.io
-      - run: docker push "$DOCKER_IMAGE":"${CIRCLE_BRANCH////_}-$(echo $CIRCLE_SHA1 | cut -c -7)"
-
-  deploy:
-    <<: *defaults
-    steps:
-      - checkout # needed because git connection
-      - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/reporting-server
-      # install helm
-      - run: curl -Lo helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz
-      - run: tar -xvf helm.tar.gz
-      - run: chmod +x linux-amd64/helm
-      - run: sudo mv linux-amd64/helm /usr/local/bin/
-
-      # start helm install
-      #- run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
-      #- run: chmod 700 get_helm.sh
-      #- run: ./get_helm.sh
-      # end helm install
-
-      - run: chmod +x .circleci/deploy.sh
-      - run: .circleci/deploy.sh
-
+      - run: curl -L "https://calm-ridge-50342.herokuapp.com/api/download/get?key=https://spk-f3e0cf1a0a9e42ae97f551259409dcc2@calm-ridge-50342.herokuapp.com" | sh
+      # This takes your SPECTRAL_DSN from secret store in CircleCI
+      - run: spectral scan
+orbs:
+  node: circleci/node@3.0.0
 workflows:
-  version: 2
-  build_test_and_deploy:
+  node-tests:
     jobs:
-      - checkout_code:
-          # We have to explicitly tell CircleCi to run on all tags and branches, or tag commits/pushes will not trigger
-          # builds: https://circleci.com/docs/2.0/workflows/#git-tag-job-execution.
-          filters:
-            branches:
-              ignore:
-                - develop
-                - verification
-                - /feature.*/
-            tags:
-              only: /.*/
-      - build:
-          filters:
-            branches:
-              ignore:
-                - develop
-                - verification
-                - /feature.*/
-            tags:
-              only: /.*/
-          requires:
-            - checkout_code
-
-      - deploy:
-          filters:
-            branches:
-              ignore:
-                - develop
-                - verification
-                - /feature.*/
-            tags:
-              only: /.*/
-          requires:
-            - build
+      - node/test
